@@ -1,4 +1,8 @@
 fun main(args: Array<String>) {
-    println("Hello, world!")
+    println("Tic-Tac-Toe")
+
+    for (i in 0..5) {
+        println(InputInterpreter.handle("$i:$i"))
+    }
 
 }

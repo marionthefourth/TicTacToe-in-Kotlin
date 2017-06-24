@@ -1,11 +1,10 @@
-
-
 sealed class InputInterpreter {
+
     companion object Factory {
         fun handle(input: String): Boolean {
             // Check that input length is correct
             if (input.length == 3) {
-                val inputValidated = booleanArrayOf(false, false)
+                var inputValidated = booleanArrayOf(false, false)
                 val validNumericInputs = arrayOf("0", "1", "2")
                 val validSpecialCharacters = arrayOf(":", "|", ",")
 
@@ -14,9 +13,12 @@ sealed class InputInterpreter {
                     if (input.indexOf(it) == 1) {
                         // read numeric values sandwiching the special characters and validate input
                         validNumericInputs.forEach {
-                            if (it.get(0).toInt() == it.toInt()) inputValidated.set(0, true)
-                            if (it.get(2).toInt() == it.toInt()) inputValidated.set(2, true)
+                            if (input.substring(0,1).toInt() == it.toInt()) inputValidated.set(0, true)
+                            if (input.substring(2,3).toInt() == it.toInt()) inputValidated.set(1, true)
                         }
+
+
+
 
                         // Return true if all inputs are valid
                         return !inputValidated.contains(false)
@@ -26,9 +28,8 @@ sealed class InputInterpreter {
                 return false
             } else {
                 // Return false if it doesn't meet length requirements
-                return false
+                return input.length == 3
             }
-
         }
     }
 
