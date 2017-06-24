@@ -49,6 +49,7 @@ class GameReferee {
 
         private fun  declareWinner(board: Board, players: Array<Player>) {
             if (board.hasCompleteSet().first) {
+                players[board.hasCompleteSet().second].wonGame()
                 println("And the winner is, ${players[board.hasCompleteSet().second].name}! Congratulations!")
             } else {
                 println("And there was a tie!")
