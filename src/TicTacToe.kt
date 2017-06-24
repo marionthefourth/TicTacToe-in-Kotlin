@@ -1,7 +1,7 @@
 fun main(args: Array<String>) {
     println("Tic-Tac-Toe")
 
-    GameReferree.newTicTacToeGame(arrayOf(Player(),Player()),Board())
+    GameReferee.newTicTacToeGame(arrayOf(Player(),Player()),Board())
 
 }
 

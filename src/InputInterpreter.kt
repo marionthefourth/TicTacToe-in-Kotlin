@@ -32,7 +32,7 @@ sealed class InputInterpreter {
                     return false
                 } else {
                     // Return false if it doesn't meet length requirements
-                    return input?.length == 3
+                    return false
                 }
             } else if (type == InputType.NAMING)  {
                 return input?.length!! > 1

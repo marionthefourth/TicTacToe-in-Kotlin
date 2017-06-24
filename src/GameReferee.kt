@@ -1,4 +1,4 @@
-class GameReferree {
+class GameReferee {
 
     companion object Factory{
         fun newTicTacToeGame(players:Array<Player>, board:Board) {
@@ -23,46 +23,50 @@ class GameReferree {
                     var playerMovePosition = readLine()
 
                     // Keep requesting Input while Player Inputs Invalid Position or Unavailable Position
-                    while (!InputInterpreter.canHandle(playerMovePosition,InputInterpreter.InputType.GAMEPLAY)) {
+                    while (gameplayInputIsInvalid(playerMovePosition,board)) {
                         // TODO - Display Input Error Here
-                        while (!board.spotIsAvailable(InputInterpreter.translateInputToPair(playerMovePosition!!))) {
-                            playerMovePosition = readLine()
-                        }
-
+                        playerMovePosition = readLine()
                     }
 
                     // Fill Spot on Board
                     board.fillSpot(InputInterpreter.translateInputToPair(playerMovePosition!!),player.getMark(index))
 
                     // Once Either a Player Wins or the Board is Full Game Ends
-                    if (board.hasCompleteSet().first or board.isFilled()) {
-
+                    if (matchIsOver(board)) {
                         matchOver = true
 
-                        // TODO - Declare Winner if Any
-                        if (board.hasCompleteSet().first) {
-                            println("And the winner is, ${players[board.hasCompleteSet().second].name}! Congratulations!")
-                        } else {
-                            println("And there was a tie!")
-                        }
+                        declareWinner(board,players)
 
-                        // TODO - Allow New Match
-                        // One Player Must Decide to Play again for new match to begin
-                        println("Do you want to play again?")
-
-                        var response = readLine()
-
-                        while (!InputInterpreter.canHandle(response,InputInterpreter.InputType.REPLAY)) {
-                            // TODO - Display Input Error Here
-                            response = readLine()
-                        }
-
-                        return InputInterpreter.process(response,InputInterpreter.InputType.REPLAY).equals("yes")
+                        return shouldPlayAgain()
                     }
                 }
             }
 
             return false
+        }
+
+        private fun  matchIsOver(board: Board) = board.hasCompleteSet().first or board.isFilled()
+
+        private fun  declareWinner(board: Board, players: Array<Player>) {
+            if (board.hasCompleteSet().first) {
+                println("And the winner is, ${players[board.hasCompleteSet().second].name}! Congratulations!")
+            } else {
+                println("And there was a tie!")
+            }
+        }
+
+        private fun shouldPlayAgain(): Boolean {
+            // One Player Must Decide to Play again for new match to begin
+            println("Do you want to play again?")
+
+            var response = readLine()
+
+            while (!InputInterpreter.canHandle(response,InputInterpreter.InputType.REPLAY)) {
+                // TODO - Display Input Error Here
+                response = readLine()
+            }
+
+            return InputInterpreter.process(response,InputInterpreter.InputType.REPLAY).equals("yes")
         }
 
         private fun createPlayers(players:Array<Player>) {
@@ -78,6 +82,18 @@ class GameReferree {
                 players.set(i,Player(input!!))
             }
 
+        }
+
+        private fun gameplayInputIsInvalid(playerMovePosition:String?, board:Board) :Boolean {
+            if (!InputInterpreter.canHandle(playerMovePosition,InputInterpreter.InputType.GAMEPLAY)) {
+                return true
+            }
+
+            if (!board.spotIsAvailable(InputInterpreter.translateInputToPair(playerMovePosition!!))) {
+                return true
+            }
+
+            return false
         }
 
     }
