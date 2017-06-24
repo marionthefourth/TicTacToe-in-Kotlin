@@ -3,6 +3,7 @@ sealed class InputInterpreter {
     // Runs a Static Instance of InputInterpreter
     companion object Factory {
         // "Handles" User input for Placing Xs and Os
+
         fun handle(input: String): Boolean {
             // Check that input length is correct
             if (input.length == 3) {
@@ -30,6 +31,14 @@ sealed class InputInterpreter {
                 // Return false if it doesn't meet length requirements
                 return input.length == 3
             }
+        }
+        // KP -- playing kotlin
+        fun process(input: String): String {
+            var output = "Incorrect Input"
+            if (InputInterpreter.handle(input)) {
+                output = input
+            }
+            return output
         }
     }
 
