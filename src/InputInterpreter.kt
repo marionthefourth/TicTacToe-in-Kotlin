@@ -1,6 +1,8 @@
 sealed class InputInterpreter {
 
     companion object Factory {
+
+        // "Handles" User input for Placing Xs and Os
         fun handle(input: String): Boolean {
             // Check that input length is correct
             if (input.length == 3) {
@@ -13,6 +15,7 @@ sealed class InputInterpreter {
                     if (input.indexOf(it) == 1) {
                         // read numeric values surrounding the special characters and validate input
                         validNumericInputs.forEach {
+
                             if (input.substring(0,1).toInt() == it.toInt()) inputValidated.set(0, true)
                             if (input.substring(2,3).toInt() == it.toInt()) inputValidated.set(1, true)
                         }
