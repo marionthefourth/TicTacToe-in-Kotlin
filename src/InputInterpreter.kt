@@ -1,5 +1,3 @@
-
-
 sealed class InputInterpreter {
     companion object Factory {
         fun handle(input: String): Boolean {
@@ -30,7 +28,8 @@ sealed class InputInterpreter {
                         return !inputValidated.contains(false)
                     }
 
-                    return true
+                    // Return false if it doesn't contain any of the special characters
+                    return false
                 }
                 return true
 
