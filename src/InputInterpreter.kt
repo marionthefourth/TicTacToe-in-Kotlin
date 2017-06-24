@@ -20,7 +20,7 @@ sealed class InputInterpreter {
                             }
 
                             if (it.get(2).toInt() == it.toInt()) {
-                                inputValidated.set(1, true)
+                                inputValidated.set(2, true)
 
                             }
 
