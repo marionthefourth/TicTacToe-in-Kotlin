@@ -1,7 +1,7 @@
 sealed class InputInterpreter {
 
+    // Runs a Static Instance of InputInterpreter
     companion object Factory {
-
         // "Handles" User input for Placing Xs and Os
         fun handle(input: String): Boolean {
             // Check that input length is correct
